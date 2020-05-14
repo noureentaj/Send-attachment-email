@@ -13,8 +13,8 @@ zikrcol = zikrdb["Zikr"]
 path = eval(cfg.get('DUAS', 'path'))
 
 
-def send_email(picture):
-    mail_module.send_mail(picture)
+def send_email(picture,email):
+    mail_module.send_mail(picture, email)
     logger.debug("Mail sent with attachment", picture)
     time.sleep(60 * 60 * 24)
 
