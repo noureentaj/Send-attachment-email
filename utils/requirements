@@ -1,0 +1,8 @@
+flask
+pymongo
+configparser
+smtplib
+email
+time
+os
+logging
