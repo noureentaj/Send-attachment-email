@@ -14,12 +14,12 @@ def send_mail(picture, toaddr):
     fromaddr = "noudopy@gmail.com"
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Greetings from python!"
-    body = "Body_of_the_mail"
+    msg['Subject'] = "Greetings from python! I am Noureen and I am lazy" # Please change all these
+    body = "Body_of_the_mail. Lazy."
     msg.attach(MIMEText(body, 'plain'))
     filename = picture
     path = eval(cfg.get('DUAS', 'path'))
-    attachment = open(path+picture, "rb")
+    attachment = open(path + picture, "rb")
     p = MIMEBase('application', 'octet-stream')
     p.set_payload(attachment.read())
     encoders.encode_base64(p)
@@ -33,4 +33,3 @@ def send_mail(picture, toaddr):
     s.quit()
 
 
-send_mail()
