@@ -17,13 +17,13 @@ mail_list = [each['email'] for each in mail_c]
 with open("index.txt", "r+") as index:
     ind = int(index.read())
 index.close()
-print(ind)
+
 content = os.listdir(path)
 send_email(content[ind], mail_list)
+print("Send dua number",ind)
 ind = ind + 1
 with open("index.txt", "w+") as rew:
     rew.write(str(ind))
 rew.close()
-print(ind)
 
 
