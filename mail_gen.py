@@ -1,4 +1,3 @@
-import configparser
 import os
 import config_handler
 from scripts import mail_module

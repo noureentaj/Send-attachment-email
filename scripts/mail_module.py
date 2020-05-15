@@ -26,7 +26,7 @@ def send_mail(picture, toaddr):
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    s.login(fromaddr, config_handler.secure["password"])
+    s.login(fromaddr, config_handler.password)
 
     text = msg.as_string()
 

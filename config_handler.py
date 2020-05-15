@@ -11,3 +11,4 @@ client = MongoClient(uri)
 zikrdb = client["ZikrDB"]
 zikrcol = zikrdb["Zikr"]
 secure = zikrdb["securethis"]
+password = secure.find_one({}, {"_id": 0})["password"]
