@@ -1,13 +1,7 @@
 from flask import Flask, render_template, request
-from pymongo import MongoClient
-from configparser import RawConfigParser
+import config_handler
 
 app = Flask(__name__)
-cfg = RawConfigParser()
-cfg.read("conf/config.conf")
-client = MongoClient(cfg.get('MONGODB', 'uri'))
-zikrdb = client["ZikrDB"]
-zikrcol = zikrdb["Zikr"]
 pairing = {}
 
 
@@ -23,9 +17,9 @@ def register():
         email = request.form.get("email")
         pairing["username"] = uname
         pairing["email"] = email
-        zikrcol.insert_one(pairing)
+        config_handler.zikrcol.insert_one(pairing)
         return "Success"
 
 
 if __name__ == "__main__":
-    app.run(host=cfg.get('SERVICE', 'endpoint'), port=cfg.get('SERVICE', 'host'))
+    app.run(host=config_handler.host, port=config_handler.port)

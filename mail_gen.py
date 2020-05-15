@@ -1,17 +1,10 @@
 import configparser
-
-from pymongo import MongoClient
-
-from scripts import mail_module
-from utils import logger
 import os
+import config_handler
+from scripts import mail_module
+from utils.logger import logger
 
-cfg = configparser.RawConfigParser()
-cfg.read('config.conf')
-client = MongoClient(cfg.get('MONGODB', 'uri'))
-zikrdb = client["ZikrDB"]
-zikrcol = zikrdb["Zikr"]
-path = eval(cfg.get('DUAS', 'path'))
+path = eval(config_handler.pic_path)
 
 
 def send_email(picture, email):
@@ -19,10 +12,15 @@ def send_email(picture, email):
     logger.debug("Mail sent with attachment", picture)
 
 
-mail_c = zikrcol.find({})
+mail_c = config_handler.zikrcol.find({})
 mail_list = [each['email'] for each in mail_c]
 
 with open("index.txt", "r+") as index:
     ind = int(index.read())
-    content = os.listdir(path)
-    send_email(content[ind], mail_list)
+index.close()
+
+content = os.listdir(path)
+send_email(content[ind], mail_list)
+ind += 1
+with open("index.txt", "w") as index:
+    index.write(ind)
