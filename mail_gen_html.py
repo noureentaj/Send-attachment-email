@@ -6,8 +6,8 @@ from utils.logger import logger
 path = eval(config_handler.pic_path)
 
 
-def send_email(email):
-    mail_module_html.send_mail(email)
+def send_email(picture, email):
+    mail_module_html.send_mail(picture, email)
     # logger.debug("Mail sent with attachment", picture)
 
 
@@ -20,8 +20,8 @@ index.close()
 
 content = os.listdir(path)
 
-send_email(mail_list)
-print("Send dua number",ind)
+send_email(content[ind], mail_list)
+print("Send dua number", ind)
 ind = ind + 1
 with open("index.txt", "w+") as rew:
     rew.write(str(ind))
